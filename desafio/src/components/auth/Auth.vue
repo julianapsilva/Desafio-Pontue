@@ -13,7 +13,7 @@
 </template>
 
 <script>
-//import {userKey} from '@global'
+import {userKey} from '@/global'
 import axios from 'axios'
 export default {
   name: 'Auth',
@@ -28,7 +28,7 @@ export default {
      try {
        let res = await axios.post('https://desafio.pontue.com.br/auth/login', this.user)
         this.$store.commit('setUser', res.data)
-          localStorage.setItem('knowUser', JSON.stringify(res.data))
+          localStorage.setItem(userKey, JSON.stringify(res.data))
           this.$router.push({path: '/'})
           alert("FUNCIONOU")
   } 

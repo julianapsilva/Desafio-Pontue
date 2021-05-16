@@ -3,21 +3,73 @@
     <Header title="Pontue - Aprendizagem Inteligente" />
     <Menu v-if="user"/>
     <Content />
-    <Footer />
+
   </div>
 </template>
 
 <script>
+import axios from "axios"
+import {userKey} from "@/global"
 import {mapState} from 'vuex'
 import Header from "./components/template/Header"
 import Menu from "./components/template/Menu"
 import Content from "./components/template/Content"
-import Footer from "./components/template/Footer"
+
+
+
+axios.interceptors.request.use(async (config) => {
+    const json = await localStorage.getItem(userKey)
+    const userData = JSON.parse(json)
+    
+      const userToken = userData.access_token
+      config.headers.Authorization = `Bearer ${userToken}`;
+    
+  return config;
+}, (error) => {
+  // I cand handle a request with errors here
+  return Promise.reject(error);
+});
+
+
+
+
+
 
 export default {
   name: 'App',
-  components: {Header, Menu, Content, Footer},
-  computed: mapState(['isMenuVisible', 'user'])
+  components: {Header, Menu, Content},
+  computed: mapState(['isMenuVisible', 'user']) ,
+  data: function(){
+    return {
+      validatingToken: true
+    }
+  },
+methods: {
+  async validateToken(){
+    this.validateToken = true
+
+    const json = localStorage.getItem(userKey)
+    const userData = JSON.parse(json)
+    this.$store.commit('setUser', null)
+
+    if(!userData){
+      this.validateToken = false
+      this.$router.push({name: 'auth'})
+      return
+    }
+    //const res = await axios.post(`${baseApiUrl}/validateToken`, userData)
+
+//faltou o IF/ ELSE AULA 1 DE TOKEN
+    this.$store.commit('setUser', userData)
+
+    this.validateToken = false
+
+  }
+},
+created(){
+  this.validateToken()
+
+}
 
 }
 </script>
@@ -38,7 +90,7 @@ body {
   grid-template-areas: 
   "header header"
   "menu content"
-  "menu footer"
+  
   ;
 }
 
