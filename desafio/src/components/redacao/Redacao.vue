@@ -22,7 +22,6 @@ export default {
 
   methods: {
     async getImage() {
-      console.log("entrou");
       let res = await axios.get(
         `https://desafio.pontue.com.br/redacao/${this.id}`
       );

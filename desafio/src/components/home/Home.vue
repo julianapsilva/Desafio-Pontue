@@ -2,6 +2,12 @@
 
 <div class="container">
    <div class="welcome"><strong>Bem vind@, {{aluno}}!</strong></div>
+   <div class="description">
+     <p>Confira suas redações já enviadas</p>
+     <router-link to="/novaredacao">
+     <button class="btn">Enviar nova redação</button>
+     </router-link>
+   </div>
 <div class="demo" v-if="pronto">
  <div class="redacao-item" v-for="value in redacoes" :key="value.id">
   
@@ -56,7 +62,7 @@ export default {
        axios.get("https://desafio.pontue.com.br/index/aluno/ef0c1f20-664a-11eb-9dbc-91c7d6b63ffc")
         .then( res => {
           this.stat = res.data.data 
-          if(this.stat.length == 70){
+          if(this.stat.length >= 3){
             this.pronto = true
           this.getRedacoes()
           }
@@ -86,7 +92,7 @@ export default {
 
 <style>
 .container{
-  margin-top: 60px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -104,7 +110,7 @@ export default {
   display: flex;
   justify-content:center;
   font-size: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
 }
 
@@ -131,5 +137,13 @@ export default {
   align-items: center;
   margin-bottom: 60px;
 
+}
+
+.description {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
 }
 </style>

@@ -1,5 +1,9 @@
 <template>
-  <aside class="menu"> </aside>
+<div>
+    <aside class="menu"> </aside>
+ 
+</div>
+
 </template>
 
 <script>
