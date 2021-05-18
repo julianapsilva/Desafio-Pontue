@@ -1,12 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-//import Home from '@/components/home/Home';
-import Home from "@/components/home/Home";
-import Auth from "@/components/auth/Auth";
-import Redacao from "@/components/redacao/Redacao";
-import CreateRedacao from "@/components/CreateRedacao"
-import UpdateRedacao from "@/components/UpdateRedacao"
+import Home from "@/components/views/Home";
+import Auth from "@/components/views/Auth";
+import Redacao from "@/components/views/Redacao";
+import CreateRedacao from "@/components/views/CreateRedacao";
+import UpdateRedacao from "@/components/views/UpdateRedacao";
 
 Vue.use(VueRouter);
 
@@ -22,23 +21,22 @@ const routes = [
     component: Auth,
   },
   {
-    path: '/redacao/:id',
+    path: "/redacao/:id",
     name: "redacao",
     component: Redacao,
-    props: true
+    props: true,
   },
   {
-    path: '/novaredacao',
+    path: "/novaredacao",
     name: "CreateRedacao",
     component: CreateRedacao,
   },
   {
-    path: '/update-redacao/:id',
+    path: "/update-redacao/:id",
     name: "updateRedacao",
     component: UpdateRedacao,
-    props: true
-
-  }
+    props: true,
+  },
 ];
 
 export default new VueRouter({

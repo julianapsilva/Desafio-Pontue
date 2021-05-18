@@ -24,7 +24,7 @@
     </div>
 
     <div class="load-more">
-      <button v-if="loadMore" @click="getRedacoes">
+      <button class="btn" v-if="loadMore" @click="getRedacoes">
         Carregar Mais Redações
       </button>
     </div>
@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import axios from "axios";
+
+import api from "@/config/services"
 
 //import PageTitle from "./components/template/PageTitle"
 
@@ -52,8 +53,8 @@ export default {
   },
   methods: {
     async getStats() {
-      axios.get(
-          `https://desafio.pontue.com.br/index/aluno/${this.$store.state.userId}`
+      api.get(
+          `/index/aluno/${this.$store.state.userId}`
         )
         .then((res) => {
           this.stat = res.data.data;
@@ -62,7 +63,7 @@ export default {
             this.getRedacoes();
           }
           if (this.stat.length >= 1) {
-            axios.get(`https://desafio.pontue.com.br/redacao/${this.stat[0].id}`)
+            api.get(`/redacao/${this.stat[0].id}`)
               .then((val) => (this.aluno = val.data.data.aluno.nome_completo));
           }
         })
@@ -128,12 +129,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin-bottom: 60px;
-background: red;
   
-}
-
-.load-more:hover{
-  transform: scale(1.2);
 }
 
 .description {

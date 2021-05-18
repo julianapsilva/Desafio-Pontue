@@ -20,10 +20,10 @@
 </template>
 
 <script>
-//import axios from "axios";
 import api from "@/config/services"
 export default {
   name: "CreateRedacao",
+  
 
   methods: {
     createRedacao() {
@@ -36,21 +36,18 @@ export default {
       body.name = file[0].name
       console.log("BODY: ", file[0])
 
-      axios.post(
-        "https://desafio.pontue.com.br/alunos/redacao/create",
-        form
-      );*/
+*/
 
       var formData = new FormData();
 var imagefile = this.$refs.file
-formData.append("image", imagefile.files[0]);
-api.post('/alunos/redacao/create', formData)
-.then(alert('SUCESS'))
-// axios.post('https://desafio.pontue.com.br/alunos/redacao/create', formData, {
-//     headers: {
-//       'Content-Type': 'multipart/form-data'
-//     }
-// })
+formData.append("file[]", imagefile.files[0]);
+console.log( imagefile.files[0])
+console.log(formData)
+
+const response = api.post('/alunos/redacao/create', formData)
+response.then(alert('SUCESS'))
+response.catch(error => console.log("ERR: ", error.response.data) )
+
     },
 
 

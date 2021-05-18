@@ -1,37 +1,18 @@
 <template>
-  <div id="app" :class="{ 'hide-menu': !isMenuVisible || !user }">
-    <Header title="Pontue - Aprendizagem Inteligente" />
+  <div id="app"
+   >
+    <Header title="Aprendizagem Inteligente" />
     <Content />
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import { userKey } from "@/global";
-import { mapState } from "vuex";
 import Header from "./components/template/Header";
 import Content from "./components/template/Content";
-
-axios.interceptors.request.use(
-  async (config) => {
-    const json = await localStorage.getItem(userKey);
-    const userData = JSON.parse(json);
-
-    const userToken = userData.access_token;
-    config.headers.Authorization = `Bearer ${userToken}`;
-
-    return config;
-  },
-  (error) => {
-    // I cand handle a request with errors here
-    return Promise.reject(error);
-  }
-);
 
 export default {
   name: "App",
   components: { Header, Content },
-  computed: mapState(["isMenuVisible", "user"]),
   data: function() {
     return {
       validatingToken: true,
@@ -41,7 +22,7 @@ export default {
     async validateToken() {
       this.validateToken = true;
 
-      const json = localStorage.getItem(userKey);
+      const json = localStorage.getItem('knowledge_user');
       const userData = JSON.parse(json);
       this.$store.commit("setUser", null);
 
@@ -50,11 +31,9 @@ export default {
         this.$router.push({ name: "auth" });
         return;
       }
-      //const res = await axios.post(`${baseApiUrl}/validateToken`, userData)
 
       //faltou o IF/ ELSE AULA 1 DE TOKEN
       this.$store.commit("setUser", userData);
-
       this.validateToken = false;
     },
   },

@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import api from "@/config/services";
 export default {
   name: "Update-Redacao",
@@ -23,14 +22,17 @@ export default {
 
   methods: {
     async update() {
-      let res = await axios.get(
-        `https://desafio.pontue.com.br/redacao/${this.id}` );
+      let res = await api.get(
+        `/redacao/${this.id}` );
       const url = res.data.data.urls[0].id;
 
       var formData = new FormData();
       var imagefile = this.$refs.file;
-      formData.append(url, imagefile.files[0]);
-      api.post(`/redacao/${this.id}/update`, formData).then(alert("SUCESS"));
+      formData.append("urls[]",url);
+      formData.append("file[]", imagefile.files[0])
+      const response = api.post(`/redacao/${this.id}/update`, formData)
+        response.then(alert("SUCESS"));
+          response.catch(error => console.log("ERR: ", error.response.data) )
     },
   },
 };
@@ -52,4 +54,6 @@ export default {
   margin-left: 100px;
   margin-bottom: 10px;
 }
+
+
 </style>

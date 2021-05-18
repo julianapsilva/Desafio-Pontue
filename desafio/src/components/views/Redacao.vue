@@ -7,14 +7,14 @@
         <router-link :to="{ name: 'updateRedacao', params: { id: this.id } }">
           <button class="btn">Editar</button></router-link
         >
-        <button class="btn" @click="deleteRedacao()">Deletar</button>
+        <button id="delete" class="btn" @click="deleteRedacao()">Deletar</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import api from "@/config/services"
 export default {
   name: "Redacao",
   props: ["id"],
@@ -30,22 +30,26 @@ export default {
 
   methods: {
     async getImage() {
-      let res = await axios.get(
-        `https://desafio.pontue.com.br/redacao/${this.id}`
+      let res = await api.get(
+        `/redacao/${this.id}`
       );
       this.data = res.data.data.created_at;
       this.image = res.data.data.urls[0].url;
       this.aluno = res.data.data.aluno.nome_completo;
     },
     deleteRedacao() {
+      console.log(this.deletada)
       const confirmar = window.confirm("Deseja realmente deletar?");
       if (confirmar) {
-        axios
-          .delete(`https://desafio.pontue.com.br/redacao/${this.id}/delete`)
+        api
+          .delete(`/redacao/${this.id}/delete`)
           .then((this.deletada = true));
       }
       if (this.deletada) {
-        window.location.href = "/";
+        alert("Redação deletada com sucesso! Você será redirecionado para a página inicial.")
+        setTimeout(function(){
+          window.location.href = "/"
+        }, 1000)
       }
     },
   },
@@ -60,23 +64,25 @@ p {
   margin-top: 30px;
   text-align: center;
 }
-img {
-  display: flex;
+/* img {
+  /* display: flex;
   justify-content: center;
   align-items: center;
   height: 90vh;
-}
+}  */
 
 .container {
-  justify-content: center;
-  column-gap: 40px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-  border: 1px solid;
-  margin: 200px;
-  padding: 40px;
+  
+  padding: 0px;
   margin-top: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 20px; 
+  display: grid;
+  grid-template-columns: 900px;
+  justify-content:center;
+  background: #F5F5F5;
+  overflow: hidden;
 }
 .buttons {
   margin-top: 20px;
@@ -84,6 +90,10 @@ img {
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
+  /* padding-bottom: 100px; */
   /* margin-bottom: 40px; */
 }
+
+
+
 </style>

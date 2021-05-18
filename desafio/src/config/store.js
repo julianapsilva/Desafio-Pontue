@@ -16,7 +16,6 @@ export default new Vuex.Store({
       state.user = user;
       if (user) {
         state.userId = user.aluno_id;
-        //axios.defaults.headers.common["Authorization"] = `bearer ${user.access_token}`;
         window.localStorage.token = `Bearer ${user.access_token}`;
         state.isMenuVisible = true;
       } else {

@@ -13,8 +13,7 @@
 </template>
 
 <script>
-import {userKey} from '@/global'
-import axios from 'axios'
+import api from "@/config/services"
 export default {
   name: 'Auth',
   data: function(){
@@ -26,14 +25,15 @@ export default {
   methods: {
     async signin(){
      try {
-       let res = await axios.post('https://desafio.pontue.com.br/auth/login', this.user)
+       console.log(this.user)
+       let res = await api.post('/auth/login', this.user)
         this.$store.commit('setUser', res.data)
-          localStorage.setItem(userKey, JSON.stringify(res.data))
+          localStorage.setItem('knowledge_user', JSON.stringify(res.data))
           this.$router.push({path: '/'})
           alert("FUNCIONOU")
   } 
   catch (error) {
-    alert(error)
+    alert("ERRO LOGIN: ",  error)
   } }
 }
 
