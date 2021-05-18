@@ -1,29 +1,28 @@
-import axios from 'axios'
-import Vue from 'vue'
-import Vuex from 'vuex'
+import axios from "axios";
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state:{
+  state: {
+    login: false,
+    userId: "",
     isMenuVisible: false,
     user: null,
-
-
   },
   mutations: {
-    setUser(state,user){
-      state.user = user
-      if(user){
-        axios.defaults.headers.common['Authorization'] = `bearer ${user.token}`
-        state.isMenuVisible = true
+    setUser(state, user) {
+      state.user = user;
+      if (user) {
+        state.userId = user.aluno_id;
+        //axios.defaults.headers.common["Authorization"] = `bearer ${user.access_token}`;
+        window.localStorage.token = `Bearer ${user.access_token}`;
+        state.isMenuVisible = true;
+      } else {
+        delete axios.defaults.headers.common["Authorization"];
+        state.isMenuVisible = false;
       }
-      else{
-        delete axios.defaults.headers.common['Authorization']
-        state.isMenuVisible = false
-      }
-    }
-  }
-
-
-})
+    },
+  },
+});

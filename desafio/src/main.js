@@ -1,19 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+import App from "./App.vue";
 
-import store from './config/store'
-import router from './config/router'
-
-
+import store from "./config/store";
+import router from "./config/router";
 
 Vue.config.productionTip = false;
-
-//TEMPORARIO
-require('axios').defaults.headers.common['Authorization'] = 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImYyYWM4Zjc1MzY5MTRjMGEwM2VmNGYzNWVjNzhiMzlkYTM0MzM3Y2Y1OTkzNGU4ZGI0YTgyMjIyOTE2MGYyOGZlY2Y1OWE5YWExNjkyOWM3In0.eyJhdWQiOiI0OTI5Njg4MC1hOTA5LTExZWItODE4MS0yN2RhYTkyNTQ4MTciLCJqdGkiOiJmMmFjOGY3NTM2OTE0YzBhMDNlZjRmMzVlYzc4YjM5ZGEzNDMzN2NmNTk5MzRlOGRiNGE4MjIyMjkxNjBmMjhmZWNmNTlhOWFhMTY5MjljNyIsImlhdCI6MTYyMTA5OTU3MCwibmJmIjoxNjIxMDk5NTcwLCJleHAiOjE2NTI2MzU1NzAsInN1YiI6ImVmMzM0NGUwLTY2NGEtMTFlYi05OTBjLWNmNzA3MTdiMTQ2ZCIsInNjb3BlcyI6W119.h1s5kTCoX0mti0vk4TpkihVNUoS669Y0cOnBCg5bg8Ds79XXFGz9AfOYHa2Lf78aJCWmY0obi7YSzm2m8uvbU7l7lZ0y74Je6dYouv2ctHB1O4zr5QNOJFysQ2djMo5sX9h86m8dayXJERmT0TEyWvy4mJS8H_lP8CV5sDfE75GwgIdmW2cIYhBptBw-x0NuxlIRnFWJmDK7AqZWUUe-10zWa9qj_DSc5E8zQ8PR2IwqY-WubwCy-aIYUwNX23re9PMFltCnF5UEUYMnToGfA5FaUrZsMU-pq3AR2x9fUi5tKnDVJijPTk6wxfhTGhpRS3sESiUmoB0Ji9Js3CPQMHAuHcqjG02TRhoti9Q3Oe-olTc1d546DMFmnq_uJQ-PbhLKi4kkCN6DETmZRK8L3EIjUL3lIxTl48q3ipc4rZK4MQuimneTJK4mTiegvjnO-gwAXNPvokGzZ8e-B2BLY1J28T-xBwPBjkukM5hOAp6vU1_wVRKyrCOwAH2hcfFdCY4EnvgbeEWBXcaB4J-q-WIvmu3GppDcBPnG3GLxLX3r86ofeDusqDnsv6CS660QWBbQBU71SU7liRjF8Hah-dKLxW2wumD9aeuujDhkEVQygU5SdKvmZ7U7PWa1yOlz04N6rLMZ3yIARLbvGPSvrYi004FA0yEeYtw_k1rOZtc'
-
 
 new Vue({
   store,
   router,
-  render: h => h(App),
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount("#app");

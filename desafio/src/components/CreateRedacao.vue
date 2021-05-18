@@ -12,7 +12,7 @@
       class="btn"
       type="button"
       value="Adicionar nova redação"
-      @click.prevent="createRedacao"
+      @click.prevent="createRedacao()"
     />
   </form>
 </div>
@@ -20,24 +20,40 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+import api from "@/config/services"
 export default {
   name: "CreateRedacao",
 
   methods: {
     createRedacao() {
-      const form = new FormData()
+      /*const form = new FormData()
       const file = this.$refs.file.files
-      console.log(file[0])
       form.append(file[0].name, file[0])
-
-      //console.log(document.getElementById('file').files[0])
+      console.log("FORM: ", form)
+      const body = {}
+      body.file = file[0]
+      body.name = file[0].name
+      console.log("BODY: ", file[0])
 
       axios.post(
         "https://desafio.pontue.com.br/alunos/redacao/create",
         form
-      );
+      );*/
+
+      var formData = new FormData();
+var imagefile = this.$refs.file
+formData.append("image", imagefile.files[0]);
+api.post('/alunos/redacao/create', formData)
+.then(alert('SUCESS'))
+// axios.post('https://desafio.pontue.com.br/alunos/redacao/create', formData, {
+//     headers: {
+//       'Content-Type': 'multipart/form-data'
+//     }
+// })
     },
+
+
   },
 };
 </script>
@@ -61,6 +77,9 @@ h2{
 
 .btn {
   margin-top: 20px;
+}
+#file{
+  margin-left: 100px
 }
 
 

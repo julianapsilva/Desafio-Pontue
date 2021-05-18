@@ -1,7 +1,6 @@
 <template>
   <div id="app" :class="{ 'hide-menu': !isMenuVisible || !user }">
     <Header title="Pontue - Aprendizagem Inteligente" />
-    <!-- <Menu v-if="user" /> -->
     <Content />
   </div>
 </template>
@@ -11,7 +10,6 @@ import axios from "axios";
 import { userKey } from "@/global";
 import { mapState } from "vuex";
 import Header from "./components/template/Header";
-// import Menu from "./components/template/Menu";
 import Content from "./components/template/Content";
 
 axios.interceptors.request.use(
