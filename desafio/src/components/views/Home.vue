@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="welcome">
-      <strong>Bem vind@, {{ aluno }}!</strong>
+      <strong>Olá, {{ aluno }}! </strong>
     </div>
     <div class="description">
-      <p>Confira suas redações já enviadas</p>
+      <p id="p-description">Confira suas redações já enviadas</p>
       <router-link to="/novaredacao">
-        <button class="btn">Enviar nova redação</button>
+        <button id="button-description" class="btn">Enviar nova redação</button>
       </router-link>
     </div>
     <div class="demo" v-if="pronto">
@@ -18,7 +18,7 @@
             width="150"
             alt="icon-redacao"
           />
-          <p>Redação criada em {{ value.created_at }}</p>
+          <p>Redação criada em {{ format_date(value.created_at) }}</p>
         </router-link>
       </div>
     </div>
@@ -34,12 +34,10 @@
 <script>
 
 import api from "@/config/services"
-
-//import PageTitle from "./components/template/PageTitle"
+  import moment from 'moment'
 
 export default {
   name: "Home",
-  //components: {PageTitle}
   data: function() {
     return {
       stat: [],
@@ -75,11 +73,16 @@ export default {
       if (this.index == this.stat.length - 1) 
       this.loadMore = false;
     },
+    format_date(value){
+         if (value) {
+           return moment(String(value)).format('DD/MM/YYYY hh:mm')
+          }
+      },
   },
   mounted() {
-    (this.pronto = false), 
-    this.getStats(), 
-    (this.index = 3);
+    // (this.pronto = false)
+    this.getStats()
+    // (this.index = 3);
   },
 };
 </script>
@@ -95,10 +98,6 @@ export default {
 .demo {
   width: 100vh;
   overflow: hidden;
-  /* justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-wrap: wrap; */
 }
 .welcome {
   display: flex;
@@ -120,7 +119,8 @@ export default {
   transform: scale(1.1);
 }
 .redacao-item p {
-  margin-left: 20px;
+  margin-top: 15px;
+  margin-left: -50px;
 }
 
 .load-more {
@@ -138,5 +138,24 @@ export default {
   justify-content: space-around;
   align-items: center;
   margin-bottom: 20px;
+}
+
+@media (min-width: 1500px){
+  #p-description{
+    margin-left: 200px;
+    margin-bottom: -10px;
+  }
+
+  #button-description{
+    margin-right: 200px;
+    margin-bottom: -5px;
+  }
+
+}
+
+@media (max-width: 800px){
+    .demo{
+    width: 50vh;
+  }
 }
 </style>

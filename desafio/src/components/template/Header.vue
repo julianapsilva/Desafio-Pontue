@@ -27,6 +27,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  max-height: 70px;
 }
 .title {
   font-size: 1.2rem;

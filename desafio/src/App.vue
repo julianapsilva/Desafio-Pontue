@@ -1,6 +1,5 @@
 <template>
-  <div id="app"
-   >
+  <div id="app">
     <Header title="Aprendizagem Inteligente" />
     <Content />
   </div>
@@ -22,7 +21,7 @@ export default {
     async validateToken() {
       this.validateToken = true;
 
-      const json = localStorage.getItem('knowledge_user');
+      const json = localStorage.getItem("knowledge_user");
       const userData = JSON.parse(json);
       this.$store.commit("setUser", null);
 
@@ -31,8 +30,6 @@ export default {
         this.$router.push({ name: "auth" });
         return;
       }
-
-      //faltou o IF/ ELSE AULA 1 DE TOKEN
       this.$store.commit("setUser", userData);
       this.validateToken = false;
     },
@@ -45,18 +42,18 @@ export default {
 
 <style>
 * {
-  font-family: "Montserrat", sans-serif;
-}
-body {
   margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
   color: #345;
 }
 
 #app {
   height: 100vh;
   display: grid;
-  /* grid-template-rows: 60px 1fr 40px; */
-  grid-template-columns:  1fr;
+  grid-template-columns: 1fr;
   grid-template-areas:
     "header header"
     "content content";
