@@ -26,8 +26,7 @@ export default {
       let res = await api.get(`/redacao/${this.id}`);
       const url = res.data.data.urls[0].id;
       var imagefile = this.$refs.file;
-
-      if (!imagefile == null && !imagefile.length == 0) {
+      if (imagefile.value != "") {
         var formData = new FormData();
         formData.append("urls[]", url);
         formData.append("file[]", imagefile.files[0]);

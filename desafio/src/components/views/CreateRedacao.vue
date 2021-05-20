@@ -27,7 +27,7 @@ export default {
     createRedacao() {
       const formData = new FormData();
       const imagefile = this.$refs.file;
-      if (!imagefile == null && !imagefile.length == 0) {
+      if (imagefile.value != "") {
         formData.append("file[]", imagefile.files[0]);
 
         const response = api.post("/alunos/redacao/create", formData);
