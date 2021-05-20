@@ -6,9 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    login: false,
     userId: "",
-    isMenuVisible: false,
     user: null,
   },
   mutations: {
@@ -17,10 +15,8 @@ export default new Vuex.Store({
       if (user) {
         state.userId = user.aluno_id;
         window.localStorage.token = `Bearer ${user.access_token}`;
-        state.isMenuVisible = true;
       } else {
         delete axios.defaults.headers.common["Authorization"];
-        state.isMenuVisible = false;
       }
     },
   },
