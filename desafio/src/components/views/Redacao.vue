@@ -42,7 +42,6 @@ export default {
       this.aluno = res.data.data.aluno.nome_completo;
     },
     deleteRedacao() {
-      console.log(this.deletada);
       const confirmar = window.confirm("Deseja realmente deletar?");
       if (confirmar) {
         api.delete(`/redacao/${this.id}/delete`).then((this.deletada = true));
@@ -107,18 +106,17 @@ img {
   margin-bottom: 100px;
 }
 
-@media (max-width: 800px){
-  p{
+@media (max-width: 800px) {
+  p {
     margin-left: -30px;
     font-size: 11px;
   }
-  .buttons button{
+  .buttons button {
     padding-left: 110px;
     padding-right: 110px;
   }
-  .container{
-      grid-template-columns: 0.95fr;
-
+  .container {
+    grid-template-columns: 0.95fr;
   }
 }
 </style>

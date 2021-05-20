@@ -9,10 +9,11 @@
         <button id="button-description" class="btn">Enviar nova redação</button>
       </router-link>
     </div>
-    <div class="demo" v-if="pronto">
+    <div class="redacao-item-container" v-if="redacoesObtidas">
       <div class="redacao-item" v-for="value in redacoes" :key="value.id">
         <router-link :to="{ name: 'redacao', params: { id: value.id } }">
-          <img class="img-redacao"
+          <img
+            class="img-redacao"
             src="@/assets/editar.svg"
             height="150"
             width="150"
@@ -32,18 +33,16 @@
 </template>
 
 <script>
-
-import api from "@/config/services"
-  import moment from 'moment'
+import api from "@/config/services";
+import moment from "moment";
 
 export default {
   name: "Home",
   data: function() {
     return {
       stat: [],
-      info: [],
       redacoes: [],
-      pronto: false,
+      redacoesObtidas: false,
       loadMore: true,
       index: 3,
       aluno: "",
@@ -51,17 +50,17 @@ export default {
   },
   methods: {
     async getStats() {
-      api.get(
-          `/index/aluno/${this.$store.state.userId}`
-        )
+      api
+        .get(`/index/aluno/${this.$store.state.userId}`)
         .then((res) => {
           this.stat = res.data.data;
           if (this.stat.length >= 3) {
-            this.pronto = true;
+            this.redacoesObtidas = true;
             this.getRedacoes();
           }
           if (this.stat.length >= 1) {
-            api.get(`/redacao/${this.stat[0].id}`)
+            api
+              .get(`/redacao/${this.stat[0].id}`)
               .then((val) => (this.aluno = val.data.data.aluno.nome_completo));
           }
         })
@@ -70,17 +69,16 @@ export default {
     getRedacoes() {
       this.redacoes = this.stat.slice(0, this.index);
       this.index += 3;
-      if (this.index == this.stat.length - 1) 
-      this.loadMore = false;
+      if (this.index == this.stat.length - 2) this.loadMore = false;
     },
-    format_date(value){
-         if (value) {
-           return moment(String(value)).format('DD/MM/YYYY hh:mm')
-          }
-      },
+    format_date(value) {
+      if (value) {
+        return moment(String(value)).format("DD/MM/YYYY hh:mm");
+      }
+    },
   },
   mounted() {
-    this.getStats()
+    this.getStats();
   },
 };
 </script>
@@ -94,7 +92,7 @@ export default {
   flex-direction: column;
   text-align: center;
 }
-.demo {
+.redacao-item-container {
   width: 100vh;
   overflow: hidden;
 }
@@ -128,7 +126,6 @@ export default {
   justify-content: center;
   align-items: center;
   margin-bottom: 60px;
-  
 }
 
 .description {
@@ -139,69 +136,66 @@ export default {
   margin-bottom: 20px;
 }
 
-@media (min-width: 1500px){
-  #p-description{
+@media (min-width: 1500px) {
+  #p-description {
     margin-left: 200px;
     margin-bottom: -10px;
   }
 
-  #button-description{
+  #button-description {
     margin-right: 200px;
     margin-bottom: -5px;
   }
-
 }
 
-@media (max-width: 800px){
-    .demo{
+@media (max-width: 800px) {
+  .redacao-item-container {
     width: 70vh;
   }
-    #p-description{
+  #p-description {
     display: none;
   }
-  .welcome{
+  .welcome {
     font-size: 20px;
   }
-  #p-description{
+  #p-description {
     display: none;
   }
-  #button-description{
+  #button-description {
     margin-top: -10px;
     font-size: 15px;
   }
 }
 
-@media(max-width: 500px){
-      .demo{
+@media (max-width: 500px) {
+  .redacao-item-container {
     width: 42vh;
   }
-  .welcome{
+  .welcome {
     font-size: 18px;
   }
-  #p-description{
+  #p-description {
     display: none;
   }
-  #button-description{
+  #button-description {
     margin-top: -10px;
     font-size: 13px;
   }
-  .redacao-item :nth-child(2){
+  .redacao-item :nth-child(2) {
     font-size: 14px;
   }
   .img-redacao {
     height: 130px;
     width: 130px;
   }
-  @media (max-width: 415px){
-      .redacao-item :nth-child(2){
-    font-size: 12px;
-    margin-left: 0px;
+  @media (max-width: 415px) {
+    .redacao-item :nth-child(2) {
+      font-size: 12px;
+      margin-left: 0px;
+    }
+    img {
+      margin-left: 30px;
+    }
   }
-  img{
-    margin-left: 30px;
-  }
-
-  }
-
 }
 </style>

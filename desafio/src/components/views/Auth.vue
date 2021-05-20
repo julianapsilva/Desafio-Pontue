@@ -31,15 +31,17 @@ export default {
   },
   methods: {
     async signin() {
-      try {
-        console.log(this.user);
-        let res = await api.post("/auth/login", this.user);
-        this.$store.commit("setUser", res.data);
-        localStorage.setItem("knowledge_user", JSON.stringify(res.data));
-        this.$router.push({ path: "/" });
-        alert("FUNCIONOU");
-      } catch (error) {
-        alert("ERRO LOGIN: ", error);
+      if (this.user.email == null || this.user.password == null) {
+        alert("Todos os campos são obrigatórios!");
+      } else {
+        try {
+          let res = await api.post("/auth/login", this.user);
+          this.$store.commit("setUser", res.data);
+          localStorage.setItem("knowledge_user", JSON.stringify(res.data));
+          this.$router.push({ path: "/" });
+        } catch (error) {
+          alert("Não foi possível acessar: ", error);
+        }
       }
     },
   },
@@ -49,7 +51,7 @@ export default {
 <style>
 .auth-content {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -57,14 +59,14 @@ export default {
   background: #f5f5f5;
   width: 350px;
   padding: 100px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
 
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.auth-title{
+.auth-title {
   font-size: 1.4rem;
   font-weight: 100;
   margin-top: 10px;
@@ -72,7 +74,7 @@ export default {
 }
 
 .auth-modal input {
-  border: 1px solid #BBB;
+  border: 1px solid #bbb;
   margin-bottom: 15px;
   padding: 3px 8px;
   outline: none;
@@ -80,7 +82,5 @@ export default {
 
 .auth-modal input:nth-child(3) {
   margin-bottom: 0px;
-
 }
-
 </style>

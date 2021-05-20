@@ -21,13 +21,13 @@ export const api = {
   post(endpoint, body) {
     return axiosInstance.post(endpoint, body);
   },
-  
-  get(endpoint){ 
+
+  get(endpoint) {
     return axiosInstance.get(endpoint);
   },
-  delete(endpoint){
+  delete(endpoint) {
     return axiosInstance.delete(endpoint);
-  }
+  },
 };
 
 export default api;

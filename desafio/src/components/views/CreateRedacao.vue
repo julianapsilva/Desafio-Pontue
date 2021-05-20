@@ -19,43 +19,35 @@
 
 <script>
 import api from "@/config/services";
-//import {required} from 'vuelidate/lib/validators';
+
 export default {
   name: "CreateRedacao",
-  // data: function() {
-  //   return {
-  //     file = null
-
-  //   }
-  // },
-  // validations: {
-
-  // },
 
   methods: {
     createRedacao() {
       const formData = new FormData();
       const imagefile = this.$refs.file;
-      formData.append("file[]", imagefile.files[0]);
-      console.log(imagefile.files[0]);
-      console.log(formData);
+      if (!imagefile == null && !imagefile.length == 0) {
+        formData.append("file[]", imagefile.files[0]);
 
-      const response = api.post("/alunos/redacao/create", formData);
-      response.then(
-        function (){
-          alert("Redação enviada com sucesso! Você será redirecionado.")
-        setTimeout(function() {
-          window.location.href = `/`;
-        }, 2000)
-        }  );
-      response.catch((error) => console.log("ERR: ", error.response.data));
+        const response = api.post("/alunos/redacao/create", formData);
+        response.then(function() {
+          alert("Redação enviada com sucesso! Você será redirecionado.");
+          setTimeout(function() {
+            window.location.href = `/`;
+          }, 2000);
+        });
+        response.catch((error) => console.log("ERR: ", error.response.data));
+      } else {
+        alert("O envio da imagem é obrigatório!");
+      }
     },
   },
 };
 </script>
 
 <style>
-.create-container{
+.create-container {
   margin-top: -300px;
 }
 h2 {
@@ -80,11 +72,10 @@ h2 {
   margin-left: 100px;
 }
 
-@media (max-width:500px){
-  h2{
+@media (max-width: 500px) {
+  h2 {
     margin-top: 10px;
     font-size: 16px;
   }
 }
-
 </style>

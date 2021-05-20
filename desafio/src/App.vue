@@ -86,10 +86,9 @@ img {
   transform: scale(1.1);
 }
 
-@media (max-width: 500px){
-  .btn{
+@media (max-width: 500px) {
+  .btn {
     font-size: 13px;
   }
 }
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class= "update-container">
+  <div class="update-container">
     <h2>Atualizar redação</h2>
     <form class="update-redacao">
       <label for="file"></label>
@@ -25,20 +25,23 @@ export default {
       let updated = false;
       let res = await api.get(`/redacao/${this.id}`);
       const url = res.data.data.urls[0].id;
-      console.log(res.data.data);
-
-      var formData = new FormData();
       var imagefile = this.$refs.file;
-      formData.append("urls[]", url);
-      formData.append("file[]", imagefile.files[0]);
 
-      const response = api.post(`/redacao/${this.id}/update`, formData);
-      response.then((updated = true));
-      response.catch((error) => console.log("ERR: ", error.response.data));
+      if (!imagefile == null && !imagefile.length == 0) {
+        var formData = new FormData();
+        formData.append("urls[]", url);
+        formData.append("file[]", imagefile.files[0]);
 
-      if (updated) {
-        alert("Redação atualizada com sucesso! Você será redirecionado.");
+        const response = api.post(`/redacao/${this.id}/update`, formData);
+        response.then((updated = true));
+        response.catch((error) => console.log("ERR: ", error.response.data));
+
+        if (updated) {
+          alert("Redação atualizada com sucesso! Você será redirecionado.");
           this.$router.push({ name: "redacao", params: { id: this.id } });
+        }
+      } else {
+        alert("O envio da imagem é obrigatório!");
       }
     },
   },
@@ -62,10 +65,9 @@ export default {
   margin-bottom: 10px;
 }
 
-@media (max-width: 500px){
-  .update-container{
+@media (max-width: 500px) {
+  .update-container {
     margin-top: -200px;
   }
-
 }
 </style>
