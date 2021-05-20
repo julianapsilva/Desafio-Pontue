@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class= "update-container">
     <h2>Atualizar redação</h2>
     <form class="update-redacao">
       <label for="file"></label>
@@ -60,5 +60,12 @@ export default {
 #file {
   margin-left: 100px;
   margin-bottom: 10px;
+}
+
+@media (max-width: 500px){
+  .update-container{
+    margin-top: -200px;
+  }
+
 }
 </style>

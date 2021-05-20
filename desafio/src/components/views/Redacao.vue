@@ -106,4 +106,19 @@ img {
   margin-top: 40px;
   margin-bottom: 100px;
 }
+
+@media (max-width: 800px){
+  p{
+    margin-left: -30px;
+    font-size: 11px;
+  }
+  .buttons button{
+    padding-left: 110px;
+    padding-right: 110px;
+  }
+  .container{
+      grid-template-columns: 0.95fr;
+
+  }
+}
 </style>

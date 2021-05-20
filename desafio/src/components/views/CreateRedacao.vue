@@ -6,7 +6,7 @@
 
     <form class="create-redacao">
       <label for="file"></label>
-      <input type="file" name="file" id="file" ref="file" required />
+      <input type="file" name="file" id="file" ref="file" />
       <input
         class="btn"
         type="submit"
@@ -19,8 +19,18 @@
 
 <script>
 import api from "@/config/services";
+//import {required} from 'vuelidate/lib/validators';
 export default {
   name: "CreateRedacao",
+  // data: function() {
+  //   return {
+  //     file = null
+
+  //   }
+  // },
+  // validations: {
+
+  // },
 
   methods: {
     createRedacao() {
@@ -68,6 +78,13 @@ h2 {
 }
 #file {
   margin-left: 100px;
+}
+
+@media (max-width:500px){
+  h2{
+    margin-top: 10px;
+    font-size: 16px;
+  }
 }
 
 </style>

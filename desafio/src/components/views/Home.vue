@@ -12,7 +12,7 @@
     <div class="demo" v-if="pronto">
       <div class="redacao-item" v-for="value in redacoes" :key="value.id">
         <router-link :to="{ name: 'redacao', params: { id: value.id } }">
-          <img
+          <img class="img-redacao"
             src="@/assets/editar.svg"
             height="150"
             width="150"
@@ -80,9 +80,7 @@ export default {
       },
   },
   mounted() {
-    // (this.pronto = false)
     this.getStats()
-    // (this.index = 3);
   },
 };
 </script>
@@ -94,6 +92,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center;
 }
 .demo {
   width: 100vh;
@@ -155,7 +154,54 @@ export default {
 
 @media (max-width: 800px){
     .demo{
-    width: 50vh;
+    width: 70vh;
   }
+    #p-description{
+    display: none;
+  }
+  .welcome{
+    font-size: 20px;
+  }
+  #p-description{
+    display: none;
+  }
+  #button-description{
+    margin-top: -10px;
+    font-size: 15px;
+  }
+}
+
+@media(max-width: 500px){
+      .demo{
+    width: 42vh;
+  }
+  .welcome{
+    font-size: 18px;
+  }
+  #p-description{
+    display: none;
+  }
+  #button-description{
+    margin-top: -10px;
+    font-size: 13px;
+  }
+  .redacao-item :nth-child(2){
+    font-size: 14px;
+  }
+  .img-redacao {
+    height: 130px;
+    width: 130px;
+  }
+  @media (max-width: 415px){
+      .redacao-item :nth-child(2){
+    font-size: 12px;
+    margin-left: 0px;
+  }
+  img{
+    margin-left: 30px;
+  }
+
+  }
+
 }
 </style>

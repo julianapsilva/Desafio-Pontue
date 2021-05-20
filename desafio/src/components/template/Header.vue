@@ -41,5 +41,10 @@ export default {
   padding-bottom: 10px;
   margin-left: 30px;
 }
+@media (max-width: 500px){
+  .title{
+    display: none;
+  }
+}
 
 </style>
